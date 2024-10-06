@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: robot-webcontrol-config
+data:
+  IP_ADDRESS: {{ .Values.env.IP_ADDRESS | quote }}
+  PORT: {{ .Values.env.PORT | quote }}
+  MQTT_SERVER: {{ .Values.env.MQTT_SERVER | quote }}
+  MQTT_PORT: {{ .Values.env.MQTT_PORT | quote }}
+  MQTT_USER: {{ .Values.env.MQTT_USER | quote }}
+  MQTT_PASSWORD: {{ .Values.env.MQTT_PASSWORD | quote }}
+  WEBCAM_STREAM_URL: {{ .Values.env.WEBCAM_STREAM_URL | quote }}
+  WEBCAM_STREAM_PORT: {{ .Values.env.WEBCAM_STREAM_PORT | quote }}

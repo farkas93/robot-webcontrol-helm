@@ -1,0 +1,4 @@
+apiVersion: v2
+name: robot-webcontrol-chart
+description: A Helm chart for the robot webcontrol app
+version: 0.1.0

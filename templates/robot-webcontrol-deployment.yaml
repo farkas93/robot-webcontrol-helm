@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: robot-webcontrol
+  name: robot-webcontrol
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: robot-webcontrol
+      io.kompose.service: robot-webcontrol
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -c
+        kompose.version: 1.34.0 (cbf2835db)
+      labels:
+        app: robot-webcontrol
+        io.kompose.service: robot-webcontrol
+    spec:
+      imagePullSecrets:
+        - name: my-dockerhub-secret
+      containers:
+        - image: cereit/robot-webcontrol:latest
+          imagePullPolicy: Always
+          name: robot-webcontrol
+          ports:
+            - containerPort: {{ .Values.env.PORT }}
+              protocol: TCP    
+          env:
+            - name: IP_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  name: robot-webcontrol-config
+                  key: IP_ADDRESS            
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: robot-webcontrol-config
+                  key: PORT
+            - name: MQTT_SERVER
+              valueFrom:
+                configMapKeyRef:
+                  name: robot-webcontrol-config
+                  key: MQTT_SERVER
+            - name: MQTT_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: robot-webcontrol-config
+                  key: MQTT_PORT
+            - name: MQTT_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: robot-webcontrol-config
+                  key: MQTT_USER
+            - name: MQTT_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: robot-webcontrol-config
+                  key: MQTT_PASSWORD
+            - name: WEBCAM_STREAM_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: robot-webcontrol-config
+                  key: WEBCAM_STREAM_URL
+            - name: WEBCAM_STREAM_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: robot-webcontrol-config
+                  key: WEBCAM_STREAM_PORT
+      restartPolicy: Always

@@ -22,7 +22,7 @@ spec:
       imagePullSecrets:
         - name: my-dockerhub-secret
       containers:
-        - image: cereit/robot-webcontrol:latest
+         - image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: Always
           name: robot-webcontrol
           ports:

@@ -1,3 +1,6 @@
+image:
+  repository: some/repo
+  tag: latest
 env:
   IP_ADDRESS: 0.0.0.0
   PORT: 30

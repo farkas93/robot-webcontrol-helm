@@ -20,7 +20,7 @@ spec:
         io.kompose.service: robot-webcontrol
     spec:
       imagePullSecrets:
-        - name: my-dockerhub-secret
+        - name: {{ .Values.registry.secret }}
       containers:
         - image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: Always
